@@ -4,8 +4,6 @@ CRUD Console application with JDBC implementation
 
 How to use:
 
-Clone or Download repository
-
-Open in IntelliJ IDEA
-
-Run StartProgramm.class
+1. Clone or Download repository
+2. Open in IntelliJ IDEA
+3. Run StartProgramm.class
