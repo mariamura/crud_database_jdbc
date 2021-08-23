@@ -12,6 +12,12 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
 
     private static Connection connection = DBUtil.getConnection();
 
+    static {
+        DBUtil.createTable("developer");
+        DBUtil.createTable("skill");
+        DBUtil.createTable("skill_developer");
+    }
+
     @Override
     public Developer save(Developer developer) {
         long id = 0;
