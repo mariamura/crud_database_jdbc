@@ -21,13 +21,13 @@ public class DBUtil {
         return connection;
     }
 
-    public static void closeConnection(Connection connection) {
+    /*public static void closeConnection(Connection connection) {
         try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static void createTable(String tableName) {
         Connection connection = getConnection();
@@ -36,12 +36,12 @@ public class DBUtil {
         if(tableName.equals("developer")) {
             try {
                 statement = connection.createStatement();
-                sql = "CREATE TABLE if not exists `developer` (\n" +
-                        "  `iddeveloper` int NOT NULL AUTO_INCREMENT,\n" +
+                sql = "create table if not exists `developer` (\n" +
+                        "  `idDeveloper` int NOT NULL AUTO_INCREMENT,\n" +
                         "  `developerFirstName` varchar(45) NOT NULL,\n" +
                         "  `developerLastName` varchar(45) NOT NULL,\n" +
                         "  `idTeam` int DEFAULT NULL,\n" +
-                        "  PRIMARY KEY (`iddeveloper`)\n" +
+                        "   primary key (`idDeveloper`)\n" +
                         ") ";
                 statement.execute(sql);
             }catch (SQLException e) {
@@ -51,11 +51,11 @@ public class DBUtil {
         if(tableName.equals("team")) {
             try {
                 statement = connection.createStatement();
-                sql = "CREATE TABLE if not exists `team` (\n" +
-                        "  `idteam` int NOT NULL AUTO_INCREMENT,\n" +
+                sql = "create table if not exists `team` (\n" +
+                        "  `idTeam` int NOT NULL AUTO_INCREMENT,\n" +
                         "  `teamName` varchar(45) NOT NULL,\n" +
                         "  `status` varchar(45) NOT NULL,\n"+
-                        "  PRIMARY KEY (`idteam`)\n" +
+                        "   primary key (`idTeam`)\n" +
                         ") ";
                 statement.execute(sql);
             }catch (SQLException e) {
@@ -65,10 +65,10 @@ public class DBUtil {
         if(tableName.equals("skill")) {
             try {
                 statement = connection.createStatement();
-                sql = "CREATE TABLE if not exists `skill` (\n" +
-                        "  `idskill` int NOT NULL AUTO_INCREMENT,\n" +
+                sql = "create table if not exists `skill` (\n" +
+                        "  `idSkill` int NOT NULL AUTO_INCREMENT,\n" +
                         "  `skillName` varchar(45) NOT NULL,\n" +
-                        "  PRIMARY KEY (`idskill`)\n" +
+                        "   primary key (`idSkill`)\n" +
                         ") ";
                 statement.execute(sql);
             }catch (SQLException e) {
@@ -78,10 +78,10 @@ public class DBUtil {
         if(tableName.equals("skill_developer")) {
             try {
                 statement = connection.createStatement();
-                sql = "CREATE TABLE if not exists `skill_developer` (\n" +
-                        "  `idskill` int NOT NULL,\n" +
-                        "  `iddeveloper` int NOT NULL,\n" +
-                        "  PRIMARY KEY (`idskill`)\n" +
+                sql = "create table if not exists `skill_developer` (\n" +
+                        "  `idSkill` int NOT NULL,\n" +
+                        "  `idDeveloper` int NOT NULL,\n" +
+                        "   primary key (`idSkill`)\n" +
                         ") ";
                 statement.execute(sql);
             }catch (SQLException e) {

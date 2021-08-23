@@ -15,6 +15,4 @@ public interface DeveloperRepository extends GenericRepository<Developer, Long> 
 
     Developer update(Developer developer);
 
-    Long getLastId();
-
 }

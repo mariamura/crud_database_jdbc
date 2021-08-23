@@ -43,24 +43,24 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     public Developer getById(Long id) {
         String firstname = "";
         String lastname = "";
-        int iddeveloper = 0;
-        String sql = "select * from developer where iddeveloper = " + id + ";";
+        int idDeveloper = 0;
+        String sql = "select * from developer where idDeveloper = " + id + ";";
         try {
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
-                iddeveloper = resultSet.getInt("iddeveloper");
+                idDeveloper = resultSet.getInt("idDeveloper");
                 firstname = resultSet.getString("developerFirstName");
                 lastname = resultSet.getString("developerLastName");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new Developer((long) iddeveloper, firstname, lastname);
+        return new Developer((long) idDeveloper, firstname, lastname);
     }
 
     @Override
     public void deleteById(Long id) {
-        String sql = "delete from developer where iddeveloper = " + id + ";";
+        String sql = "delete from developer where idDeveloper = " + id + ";";
         try {
             connection.createStatement().executeQuery(sql);
         } catch (SQLException e) {
@@ -75,7 +75,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
         try {
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
-                long id = resultSet.getInt("iddeveloper");
+                long id = resultSet.getInt("idDeveloper");
                 String firstname = resultSet.getString("developerFirstName");
                 String lastname = resultSet.getString("developerLastName");
                 Developer developer = new Developer(id, firstname, lastname);
@@ -89,11 +89,13 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
 
     @Override
     public Developer update(Developer developer) {
-        return null;
-    }
-
-    @Override
-    public Long getLastId() {
-        return null;
+        Developer developerNew = new Developer(
+                developer.getId(),
+                developer.getFirstName(),
+                developer.getLastName(),
+                developer.getSkills());
+        deleteById(developer.getId());
+        save(developerNew);
+        return developerNew;
     }
 }
