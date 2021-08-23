@@ -15,6 +15,16 @@ public class Developer {
         this.lastName = lastName;
         this.skills = skills;
     }
+    public Developer(Long id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    public Developer(String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Long getId() {
         return id;
@@ -53,8 +63,6 @@ public class Developer {
         return "Developer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", skills=" + skills +
-                '}';
+                ", lastName='" + lastName + "'}";
     }
 }

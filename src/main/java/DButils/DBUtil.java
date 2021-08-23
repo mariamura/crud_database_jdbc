@@ -3,10 +3,10 @@ package DButils;
 import java.sql.*;
 
 public class DBUtil {
+
     static final String DATABASE_URL = "jdbc:mysql://localhost:3306/crud_database";
     static final String USER = "maria";
     static final String PASSWORD = "1234";
-
 
     public static Connection getConnection() {
         Connection connection = null;
@@ -36,7 +36,41 @@ public class DBUtil {
         if(tableName.equals("developer")) {
             try {
                 statement = connection.createStatement();
-                sql = "CREATE TABLE IF NOT EXISTS `developer`.`crud_database` (`col` VARCHAR(16) NOT NULL )";
+                sql = "create table if not exists `developer` \n" +
+                        "(\n" +
+                        "`iddeveloper` int(11) NOT NULL auto_increment,\n" +
+                        "`fisrtname` varchar(11) NOT NULL,\n" +
+                        "`lastname` varchar(11) NOT NULL,\n" +
+                        "`idteam` int(11)\n" +
+                        ");";
+                statement.execute(sql);
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(tableName.equals("team")) {
+            try {
+                statement = connection.createStatement();
+                sql = "create table if not exists `team` \n" +
+                        "(\n" +
+                        "`idteam` int(11) NOT NULL auto_increment,\n" +
+                        "`name` varchar(11) NOT NULL,\n" +
+                        "`status` varchar(11)\n" +
+                        ");";
+                statement.execute(sql);
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(tableName.equals("skill")) {
+            try {
+                statement = connection.createStatement();
+                sql = "create table if not exists `skill` \n" +
+                        "(\n" +
+                        "`idskill` int(11) NOT NULL auto_increment,\n" +
+                        "`name` varchar(11) NOT NULL,\n" +
+                        ");";
+                statement.execute(sql);
             }catch (SQLException e) {
                 e.printStackTrace();
             }
