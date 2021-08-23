@@ -1,5 +1,3 @@
-create database crud_db;
-
 create table team (
     teamId 	            int(10) not null AUTO_INCREMENT,
     teamName    	    varchar(100),
