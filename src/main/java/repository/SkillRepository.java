@@ -14,6 +14,4 @@ public interface SkillRepository extends GenericRepository<Skill, Long> {
     List<Skill> getAll();
 
     Skill update(Skill skill);
-
-    Long getLastId();
 }

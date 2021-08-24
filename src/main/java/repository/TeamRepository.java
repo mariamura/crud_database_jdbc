@@ -14,6 +14,4 @@ public interface TeamRepository extends GenericRepository<Team, Long> {
     List<Team> getAll();
 
     Team update(Team team);
-
-    Long getLastId();
 }

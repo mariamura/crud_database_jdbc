@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DeveloperRepositoryImpl implements DeveloperRepository {
 
-    private static Connection connection = DBUtil.getConnection();
+    private static final Connection connection = DBUtil.getConnection();
 
     static {
         DBUtil.createTable("developer");

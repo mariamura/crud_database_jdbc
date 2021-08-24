@@ -16,6 +16,23 @@ public class Team {
         this.teamStatus = teamStatus;
     }
 
+    public Team(Long id, String name, TeamStatus teamStatus) {
+        this.id = id;
+        this.name = name;
+        this.teamStatus = teamStatus;
+    }
+
+    public Team(String name, TeamStatus teamStatus) {
+        this.name = name;
+        this.teamStatus = teamStatus;
+    }
+
+    public Team(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
     public Long getId() {
         return id;
     }
