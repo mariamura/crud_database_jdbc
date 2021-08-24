@@ -61,7 +61,7 @@ public class TeamRepositoryImpl implements TeamRepository {
     public void deleteById(Long id) {
         String sql = "delete from team where idTeam = " + id + ";";
         try {
-            connection.createStatement().executeQuery(sql);
+            connection.createStatement().execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }

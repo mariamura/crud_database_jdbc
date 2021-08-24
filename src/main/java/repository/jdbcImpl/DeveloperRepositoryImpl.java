@@ -62,7 +62,7 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     public void deleteById(Long id) {
         String sql = "delete from developer where idDeveloper = " + id + ";";
         try {
-            connection.createStatement().executeQuery(sql);
+            connection.createStatement().execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
