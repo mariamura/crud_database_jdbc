@@ -1,10 +1,9 @@
 import model.Developer;
 import repository.jdbcImpl.DeveloperRepositoryImpl;
+import view.ConsoleStarter;
 
 public class StartProgram {
-	public static void main(String[] args) {
-		DeveloperRepositoryImpl developerRepository = new DeveloperRepositoryImpl();
-		System.out.println(developerRepository.save(new Developer("Mike", "Vazovskiy")));
-
+	public static void main(String[] args) throws Exception {
+		//ConsoleStarter.start();
 	}
 }
