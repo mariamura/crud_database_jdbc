@@ -13,9 +13,9 @@ public class TeamRepositoryImpl implements TeamRepository {
 
     private static final Connection connection = DBUtil.getConnection();
 
-    static {
+    /*static {
         DBUtil.createTable("team");
-    }
+    }*/
 
     @Override
     public Team save(Team team) {

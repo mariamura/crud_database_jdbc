@@ -1,0 +1,10 @@
+--liquibase formatter sql
+
+--changeset user:1
+create table if not exists `developer` (\n" +
+                        "  `idDeveloper` int NOT NULL AUTO_INCREMENT,\n" +
+                        "  `developerFirstName` varchar(45) NOT NULL,\n" +
+                        "  `developerLastName` varchar(45) NOT NULL,\n" +
+                        "  `idTeam` int DEFAULT NULL,\n" +
+                        "   primary key (`idDeveloper`)\n" +
+                        ") 
