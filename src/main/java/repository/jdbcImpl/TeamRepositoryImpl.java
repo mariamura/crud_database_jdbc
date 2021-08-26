@@ -13,16 +13,13 @@ public class TeamRepositoryImpl implements TeamRepository {
 
     private static final Connection connection = DBUtil.getConnection();
 
-    /*static {
-        DBUtil.createTable("team");
-    }*/
 
     @Override
     public Team save(Team team) {
         long id = 0;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "insert into team (teamName, status) values(?, ?)"
+                    "insert into team (teamName, teamStatus) values(?, ?)"
                     , Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,team.getName());
             preparedStatement.setString(2,team.getTeamStatus().toString());
@@ -49,7 +46,9 @@ public class TeamRepositoryImpl implements TeamRepository {
             while (resultSet.next()) {
                 idTeam = resultSet.getInt("idTeam");
                 name = resultSet.getString("teamName");
-                status = resultSet.getObject("teamStatus", TeamStatus.class);
+                String statusString = resultSet.getString("teamStatus");
+                if(statusString.equalsIgnoreCase("active")) status = TeamStatus.ACTIVE;
+                else status = TeamStatus.DELETED;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,7 +78,9 @@ public class TeamRepositoryImpl implements TeamRepository {
             while (resultSet.next()) {
                 idTeam = resultSet.getInt("idTeam");
                 name = resultSet.getString("teamName");
-                status = resultSet.getObject("teamStatus", TeamStatus.class);
+                String statusString = resultSet.getString("teamStatus");
+                if(statusString.equalsIgnoreCase("active")) status = TeamStatus.ACTIVE;
+                else status = TeamStatus.DELETED;
                 Team team = new Team((long) idTeam, name, status);
                 teams.add(team);
             }

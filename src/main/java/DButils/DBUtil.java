@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DBUtil {
 
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/crud_database";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/crud_database?serverTimezone=Europe/Moscow";
     private static final String USER = "maria";
     private static final String PASSWORD = "123";
     private static Connection connection;

@@ -12,12 +12,6 @@ public class SkillRepositoryImpl implements SkillRepository {
 
     private static final Connection connection = DBUtil.getConnection();
 
-    /*static {
-        DBUtil.createTable("skill");
-        DBUtil.createTable("skill_developer");
-    }*/
-
-
     @Override
     public Skill save(Skill skill) {
         long id = 0;

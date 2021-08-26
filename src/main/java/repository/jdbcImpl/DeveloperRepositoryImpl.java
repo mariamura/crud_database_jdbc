@@ -2,6 +2,7 @@ package repository.jdbcImpl;
 
 import DButils.DBUtil;
 import model.Developer;
+import model.Skill;
 import repository.DeveloperRepository;
 
 import java.sql.*;
@@ -11,12 +12,6 @@ import java.util.List;
 public class DeveloperRepositoryImpl implements DeveloperRepository {
 
     private static final Connection connection = DBUtil.getConnection();
-
-    /*static {
-        DBUtil.createTable("developer");
-        DBUtil.createTable("skill");
-        DBUtil.createTable("skill_developer");
-    }*/
 
     @Override
     public Developer save(Developer developer) {
@@ -32,6 +27,24 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
             if(rs.next()){
                 id = rs.getInt(1);
             }
+            List<Skill> skills = developer.getSkills();
+
+            if(!skills.isEmpty()) {
+                PreparedStatement preparedStatement2 = connection.prepareStatement(
+                        "insert into skill_developer (idSkill, idDeveloper) values(?," + id + ")");
+                ResultSet resultSet;
+                String sql;
+
+                for(Skill skill: skills) {
+                    sql = "select * from skill where skillName = '" + skill.getName() + "'";
+                    System.out.println(sql);
+                    resultSet = connection.createStatement().executeQuery(sql);
+                    resultSet.next();
+                    int idSkill = resultSet.getInt("idSkill");
+                    preparedStatement2.setString(1, String.valueOf(idSkill));
+                    preparedStatement2.executeUpdate();
+                }
+            }
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,19 +56,35 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
     public Developer getById(Long id) {
         String firstname = "";
         String lastname = "";
+        String skillName;
         int idDeveloper = 0;
-        String sql = "select * from developer where idDeveloper = " + id + ";";
+        int idSkill = 0;
+        List<Skill> skillList = new ArrayList<>();
+        String sql;
         try {
+            sql = "select * from developer where idDeveloper = " + id + ";";
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
                 idDeveloper = resultSet.getInt("idDeveloper");
                 firstname = resultSet.getString("developerFirstName");
                 lastname = resultSet.getString("developerLastName");
             }
+            sql = "select sk.idSkill, sk.skillName\n" +
+                    "from developer d\n" +
+                    "join skill_developer as s on d.iddeveloper = s.idDeveloper\n" +
+                    "join skill as sk on s.idSkill = sk.idSkill\n" +
+                    "where d.iddeveloper = " + idDeveloper + ";";
+            resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                idSkill = resultSet.getInt("idSkill");
+                skillName = resultSet.getString("skillName");
+                skillList.add(new Skill((long) idSkill, skillName));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new Developer((long) idDeveloper, firstname, lastname);
+        return new Developer((long) idDeveloper, firstname, lastname, skillList);
     }
 
     @Override
