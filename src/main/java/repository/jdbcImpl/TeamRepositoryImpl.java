@@ -53,6 +53,7 @@ public class TeamRepositoryImpl implements TeamRepository {
         String name = "";
         int idTeam = 0;
         TeamStatus status = null;
+        List<Developer> developers = new ArrayList<>();
         String sql = "select * from team where idTeam = " + id + ";";
         try {
             ResultSet resultSet = connection.createStatement().executeQuery(sql);
@@ -63,10 +64,22 @@ public class TeamRepositoryImpl implements TeamRepository {
                 if(statusString.equalsIgnoreCase("active")) status = TeamStatus.ACTIVE;
                 else status = TeamStatus.DELETED;
             }
+
+            sql = "select d.developerFirstName, d.developerLastName\n" +
+                    "from developer d\n" +
+                    "join team as t on d.idTeam = t.idTeam\n" +
+                    "where d.idTeam =" + idTeam  +";";
+            resultSet = connection.createStatement().executeQuery(sql);
+            while (resultSet.next()) {
+                int idDeveloper = resultSet.getInt("idDeveloper");
+                String developerFirstName = resultSet.getString("developerFirstName");
+                String developerLastName = resultSet.getString("developerLastName");
+                developers.add(new Developer((long) idDeveloper, developerFirstName, developerLastName));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new Team((long) idTeam, name, status);
+        return new Team((long) idTeam, name, developers, status);
     }
 
     @Override
