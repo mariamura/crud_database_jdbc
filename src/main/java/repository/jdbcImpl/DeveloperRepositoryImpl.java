@@ -37,7 +37,6 @@ public class DeveloperRepositoryImpl implements DeveloperRepository {
 
                 for(Skill skill: skills) {
                     sql = "select * from skill where skillName = '" + skill.getName() + "'";
-                    System.out.println(sql);
                     resultSet = connection.createStatement().executeQuery(sql);
                     resultSet.next();
                     int idSkill = resultSet.getInt("idSkill");

@@ -1,6 +1,8 @@
 package repository.jdbcImpl;
 
 import DButils.DBUtil;
+import model.Developer;
+import model.Skill;
 import model.Team;
 import model.TeamStatus;
 import repository.TeamRepository;
@@ -28,6 +30,17 @@ public class TeamRepositoryImpl implements TeamRepository {
             if(rs.next()){
                 id = rs.getInt(1);
             }
+
+            List<Developer> developers = team.getDevelopers();
+            if(!developers.isEmpty()) {
+                String sql;
+                for(Developer developer: developers) {
+                    sql = "update developer set idTeam = '" + id +  "' where idDeveloper = " + developer.getId();
+                    Statement statement = connection.createStatement();
+                    statement.executeUpdate(sql);
+                }
+            }
+
         }catch (SQLException e) {
             e.printStackTrace();
         }

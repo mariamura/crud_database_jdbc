@@ -38,7 +38,7 @@
         </createTable>
         <createTable tableName="skill_developer">
             <column name="idSkill" type="INT">
-                <constraints nullable="false" primaryKey="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="idDeveloper" type="INT">
                 <constraints nullable="false"/>
