@@ -2,6 +2,7 @@ package repository.jdbcImpl;
 
 import DButils.DBUtil;
 import model.Developer;
+import model.Skill;
 import model.Team;
 import model.TeamStatus;
 import repository.TeamRepository;
@@ -34,7 +35,7 @@ public class TeamRepositoryImpl implements TeamRepository {
             if(!developers.isEmpty()) {
                 String sql;
                 for(Developer developer: developers) {
-                    sql = "update developer set idTeam = '" + id +  "' where idDeveloper = " + developer.getId();
+                    sql = "update developer set idTeam = '" + id +  "' where iddeveloper = " + developer.getId();
                     Statement statement = connection.createStatement();
                     statement.executeUpdate(sql);
                 }
@@ -64,17 +65,32 @@ public class TeamRepositoryImpl implements TeamRepository {
                 else status = TeamStatus.DELETED;
             }
 
-            sql = "select d.developerFirstName, d.developerLastName\n" +
+            sql = "select d.iddeveloper, d.developerFirstName, d.developerLastName\n" +
                     "from developer d\n" +
                     "join team as t on d.idTeam = t.idTeam\n" +
                     "where d.idTeam =" + idTeam  +";";
             resultSet = connection.createStatement().executeQuery(sql);
             while (resultSet.next()) {
-                int idDeveloper = resultSet.getInt("idDeveloper");
+                List<Skill> skillList = new ArrayList<>();
+                int idDeveloper = resultSet.getInt("iddeveloper");
                 String developerFirstName = resultSet.getString("developerFirstName");
                 String developerLastName = resultSet.getString("developerLastName");
-                developers.add(new Developer((long) idDeveloper, developerFirstName, developerLastName));
+
+                sql = "select sk.idSkill, sk.skillName\n" +
+                        "from developer d\n" +
+                        "join skill_developer as s on d.iddeveloper = s.idDeveloper\n" +
+                        "join skill as sk on s.idSkill = sk.idSkill\n" +
+                        "where d.iddeveloper = " + idDeveloper + ";";
+                resultSet = connection.createStatement().executeQuery(sql);
+                while (resultSet.next()) {
+                    int idSkill = resultSet.getInt("idSkill");
+                    String skillName = resultSet.getString("skillName");
+                    skillList.add(new Skill((long) idSkill, skillName));
+                }
+
+                developers.add(new Developer((long) idDeveloper, developerFirstName, developerLastName, skillList));
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
