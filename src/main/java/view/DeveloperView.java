@@ -1,5 +1,6 @@
 package view;
 
+import DButils.DBUtil;
 import controller.DeveloperController;
 import controller.SkillController;
 import model.ConsoleMessage;
@@ -65,6 +66,7 @@ public class DeveloperView {
                     ConsoleStarter.start();
                 case "7":
                     exit = true;
+                    DBUtil.closeConnection();
                     break;
             }
         } while (!exit);

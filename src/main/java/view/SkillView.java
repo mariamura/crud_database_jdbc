@@ -1,5 +1,6 @@
 package view;
 
+import DButils.DBUtil;
 import controller.SkillController;
 import model.ConsoleMessage;
 import model.Skill;
@@ -59,6 +60,7 @@ public class SkillView {
                     ConsoleStarter.start();
                 case "7":
                     exit = true;
+                    DBUtil.closeConnection();
                     break;
             }
         } while (!exit);

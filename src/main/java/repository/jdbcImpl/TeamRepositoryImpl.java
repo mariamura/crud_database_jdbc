@@ -2,7 +2,6 @@ package repository.jdbcImpl;
 
 import DButils.DBUtil;
 import model.Developer;
-import model.Skill;
 import model.Team;
 import model.TeamStatus;
 import repository.TeamRepository;

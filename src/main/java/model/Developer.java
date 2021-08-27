@@ -26,6 +26,10 @@ public class Developer {
         this.lastName = lastName;
     }
 
+    public Developer() {
+
+    }
+
     public Long getId() {
         return id;
     }

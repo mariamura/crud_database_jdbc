@@ -1,5 +1,6 @@
 package view;
 
+import DButils.DBUtil;
 import controller.TeamController;
 import model.ConsoleMessage;
 import model.TeamStatus;
@@ -37,7 +38,10 @@ public class TeamStatusView {
                     TeamView.startTeam();
                     exit = true;
                 }
-                case "4" -> exit = true;
+                case "4" -> {
+                    exit = true;
+                    DBUtil.closeConnection();
+                }
             }
         } while (!exit);
     }

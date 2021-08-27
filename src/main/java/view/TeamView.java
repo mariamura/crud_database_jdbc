@@ -1,5 +1,6 @@
 package view;
 
+import DButils.DBUtil;
 import controller.DeveloperController;
 import controller.TeamController;
 import model.ConsoleMessage;
@@ -73,6 +74,7 @@ public class TeamView {
                     ConsoleStarter.start();
                 case "7":
                     exit = true;
+                    DBUtil.closeConnection();
                     break;
             }
         } while (!exit);
