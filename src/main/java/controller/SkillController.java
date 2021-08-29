@@ -6,14 +6,11 @@ import repository.jdbcImpl.SkillRepositoryImpl;
 import java.util.List;
 
 public class SkillController {
+
     SkillRepositoryImpl skillRepository;
 
     public SkillController(SkillRepositoryImpl skillRepository) {
         this.skillRepository = skillRepository;
-    }
-
-    public SkillController() {
-
     }
 
     public List<Skill> getAll(){
@@ -24,12 +21,12 @@ public class SkillController {
         return skillRepository.getById(id);
     }
 
-    public void save(Skill skill){
-        skillRepository.save(skill);
+    public Skill save(Skill skill){
+        return skillRepository.save(skill);
     }
 
-    public void update(Skill skill){
-        skillRepository.update(skill);
+    public Skill update(Skill skill){
+        return skillRepository.update(skill);
     }
 
     public void deleteById(Long id){

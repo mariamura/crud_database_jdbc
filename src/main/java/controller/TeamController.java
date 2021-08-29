@@ -7,7 +7,12 @@ import repository.jdbcImpl.TeamRepositoryImpl;
 import java.util.List;
 
 public class TeamController {
-    TeamRepository teamRepository = new TeamRepositoryImpl();
+
+    TeamRepositoryImpl teamRepository;
+
+    public TeamController(TeamRepositoryImpl teamRepository) {
+        this.teamRepository = teamRepository;
+    }
 
     public List<Team> getAll(){
         return teamRepository.getAll();
@@ -17,12 +22,12 @@ public class TeamController {
         return teamRepository.getById(id);
     }
 
-    public void save(Team team){
-        teamRepository.save(team);
+    public Team save(Team team){
+        return teamRepository.save(team);
     }
 
-    public void update(Team team){
-        teamRepository.update(team);
+    public Team update(Team team){
+        return teamRepository.update(team);
     }
 
     public void deleteById(Long id){

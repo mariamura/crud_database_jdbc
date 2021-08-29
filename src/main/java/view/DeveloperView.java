@@ -6,6 +6,7 @@ import controller.SkillController;
 import model.ConsoleMessage;
 import model.Developer;
 import model.Skill;
+import repository.jdbcImpl.DeveloperRepositoryImpl;
 import repository.jdbcImpl.SkillRepositoryImpl;
 
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ public class DeveloperView {
                     "4. exit\n" +
                     ConsoleMessage.LINE.getMessage();
 
-    private static final DeveloperController developerController = new DeveloperController();
-    private static final SkillController skillController = new SkillController();
+    private static final DeveloperController developerController = new DeveloperController(new DeveloperRepositoryImpl());
+    private static final SkillController skillController = new SkillController(new SkillRepositoryImpl());
 
     public static void startDev() throws Exception {
         boolean exit = false;

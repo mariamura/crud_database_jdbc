@@ -7,6 +7,8 @@ import model.ConsoleMessage;
 import model.Developer;
 import model.Team;
 import model.TeamStatus;
+import repository.jdbcImpl.DeveloperRepositoryImpl;
+import repository.jdbcImpl.TeamRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +43,8 @@ public class TeamView {
                     "4. exit\n" +
                     ConsoleMessage.LINE.getMessage();
 
-    private static final TeamController teamController = new TeamController();
-    private static final DeveloperController developerController = new DeveloperController();
+    private static final TeamController teamController = new TeamController(new TeamRepositoryImpl());
+    private static final DeveloperController developerController = new DeveloperController(new DeveloperRepositoryImpl());
 
     public static void startTeam() throws Exception {
         boolean exit = false;

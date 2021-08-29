@@ -4,6 +4,7 @@ import DButils.DBUtil;
 import controller.TeamController;
 import model.ConsoleMessage;
 import model.TeamStatus;
+import repository.jdbcImpl.TeamRepositoryImpl;
 
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class TeamStatusView {
                     "4. Exit\n" +
                     ConsoleMessage.LINE.getMessage();
 
-    private static final TeamController teamController = new TeamController();
+    private static final TeamController teamController = new TeamController(new TeamRepositoryImpl());
 
     public static void startTeamSt() throws Exception {
         boolean exit = false;

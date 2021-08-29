@@ -29,7 +29,7 @@ public class SkillView {
                     "2. exit\n" +
                     ConsoleMessage.LINE.getMessage();
 
-    private static final SkillController skillController = new SkillController();
+    private static final SkillController skillController = new SkillController(new SkillRepositoryImpl());
 
     public static void startSkill() throws Exception {
         boolean exit = false;

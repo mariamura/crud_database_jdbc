@@ -3,20 +3,18 @@ import model.Skill;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import repository.jdbcImpl.SkillRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@ExtendWith(MockitoExtension.class)
 public class SkillControllerTest {
 
+    Long ID = 1L;
+    Skill skill = new Skill(1L, "java");
     SkillController skillController = null;
     SkillRepositoryImpl skillRepository = Mockito.mock(SkillRepositoryImpl.class);
-
 
     @Before
     public void setUp() {
@@ -24,14 +22,19 @@ public class SkillControllerTest {
     }
 
     @Test
-    public void testGetAllSkill() {
-        Skill java = new Skill(1L, "java");
-        Skill php = new Skill(2L, "php");
+    public void testGetAll() {
         List<Skill> skills = new ArrayList<>();
-        skills.add(java);
-        skills.add(php);
+        skills.add(skill);
         Mockito.when(skillRepository.getAll()).thenReturn(skills);
         Assert.assertEquals(skillController.getAll(), skills);
+    }
+
+
+    @Test
+    public void testGetById() {
+        skillController.save(skill);
+        Mockito.when(skillController.getById(ID)).thenReturn(skill);
+        Assert.assertEquals(skillRepository.getById(ID),skill);
     }
 
 }

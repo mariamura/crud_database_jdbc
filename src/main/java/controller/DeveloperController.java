@@ -8,7 +8,11 @@ import java.util.List;
 
 public class DeveloperController {
 
-    DeveloperRepository developerRepository = new DeveloperRepositoryImpl();
+    DeveloperRepository developerRepository;
+
+    public DeveloperController(DeveloperRepositoryImpl developerRepository) {
+        this.developerRepository = developerRepository;
+    }
 
     public List<Developer> getAll(){
         return developerRepository.getAll();
@@ -18,12 +22,12 @@ public class DeveloperController {
         return developerRepository.getById(id);
     }
 
-    public void save(Developer developer){
-        developerRepository.save(developer);
+    public Developer save(Developer developer){
+        return developerRepository.save(developer);
     }
 
-    public void update(Developer developer){
-        developerRepository.update(developer);
+    public Developer update(Developer developer){
+        return developerRepository.update(developer);
     }
 
     public void deleteById(Long id){
