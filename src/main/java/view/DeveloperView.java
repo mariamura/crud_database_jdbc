@@ -6,6 +6,7 @@ import controller.SkillController;
 import model.ConsoleMessage;
 import model.Developer;
 import model.Skill;
+import repository.jdbcImpl.SkillRepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;

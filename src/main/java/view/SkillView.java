@@ -4,6 +4,7 @@ import DButils.DBUtil;
 import controller.SkillController;
 import model.ConsoleMessage;
 import model.Skill;
+import repository.jdbcImpl.SkillRepositoryImpl;
 
 import java.util.List;
 import java.util.Scanner;

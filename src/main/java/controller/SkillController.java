@@ -7,7 +7,15 @@ import repository.jdbcImpl.SkillRepositoryImpl;
 import java.util.List;
 
 public class SkillController {
-    SkillRepository skillRepository = new SkillRepositoryImpl();
+    SkillRepositoryImpl skillRepository;
+
+    public SkillController(SkillRepositoryImpl skillRepository) {
+        this.skillRepository = skillRepository;
+    }
+
+    public SkillController() {
+
+    }
 
     public List<Skill> getAll(){
         return skillRepository.getAll();
