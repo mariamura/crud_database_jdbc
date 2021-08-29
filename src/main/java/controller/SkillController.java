@@ -1,7 +1,6 @@
 package controller;
 
 import model.Skill;
-import repository.SkillRepository;
 import repository.jdbcImpl.SkillRepositoryImpl;
 
 import java.util.List;

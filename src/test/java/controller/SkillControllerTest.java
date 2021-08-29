@@ -34,6 +34,4 @@ public class SkillControllerTest {
         Assert.assertEquals(skillController.getAll(), skills);
     }
 
-
-
 }
