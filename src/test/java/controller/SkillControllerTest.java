@@ -11,8 +11,7 @@ import java.util.List;
 
 public class SkillControllerTest {
 
-    Long ID = 1L;
-    Skill skill = new Skill(1L, "java");
+    final long ID = 1L;
     SkillController skillController = null;
     SkillRepositoryImpl skillRepository = Mockito.mock(SkillRepositoryImpl.class);
 
@@ -21,10 +20,14 @@ public class SkillControllerTest {
         skillController = new SkillController(skillRepository);
     }
 
+    private Skill getSkill() {
+        return new Skill(ID, "java");
+    }
+
     @Test
     public void testGetAll() {
         List<Skill> skills = new ArrayList<>();
-        skills.add(skill);
+        skills.add(getSkill());
         Mockito.when(skillRepository.getAll()).thenReturn(skills);
         Assert.assertEquals(skillController.getAll(), skills);
     }
@@ -32,9 +35,9 @@ public class SkillControllerTest {
 
     @Test
     public void testGetById() {
-        skillController.save(skill);
-        Mockito.when(skillController.getById(ID)).thenReturn(skill);
-        Assert.assertEquals(skillRepository.getById(ID),skill);
+        skillController.save(getSkill());
+        Mockito.when(skillController.getById(ID)).thenReturn(getSkill());
+        Assert.assertEquals(skillRepository.getById(ID),getSkill());
     }
 
 }

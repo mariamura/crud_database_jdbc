@@ -1,7 +1,6 @@
 package controller;
 
 import model.Developer;
-import model.Skill;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +12,7 @@ import java.util.List;
 
 public class DeveloperControllerTest {
 
-    Long ID = 1L;
-    Developer developer = new Developer(1L, "first1", "last1");
+    final long ID = 1L;
     DeveloperController developerController = null;
     DeveloperRepositoryImpl developerRepository = Mockito.mock(DeveloperRepositoryImpl.class);
 
@@ -23,18 +21,22 @@ public class DeveloperControllerTest {
         developerController = new DeveloperController(developerRepository);
     }
 
+    private Developer getDeveloper() {
+        return new Developer(1L, "first1", "last1");
+    }
+
     @Test
     public void testGetAll() {
         List<Developer> developers = new ArrayList<>();
-        developers.add(developer);
+        developers.add(getDeveloper());
         Mockito.when(developerRepository.getAll()).thenReturn(developers);
         Assert.assertEquals(developerController.getAll(), developers);
     }
 
     @Test
     public void testGetById() {
-        developerController.save(developer);
-        Mockito.when(developerController.getById(ID)).thenReturn(developer);
-        Assert.assertEquals(developerRepository.getById(ID),developer);
+        developerController.save(getDeveloper());
+        Mockito.when(developerController.getById(ID)).thenReturn(getDeveloper());
+        Assert.assertEquals(developerRepository.getById(ID),getDeveloper());
     }
 }

@@ -12,8 +12,7 @@ import java.util.List;
 
 public class TeamControllerTest {
 
-    Long ID = 1L;
-    Team team1 = new Team(1L, "test1");
+    final long ID = 1L;
     TeamController teamController = null;
     TeamRepositoryImpl teamRepository = Mockito.mock(TeamRepositoryImpl.class);
 
@@ -22,19 +21,23 @@ public class TeamControllerTest {
         teamController = new TeamController(teamRepository);
     }
 
+    private Team getTeam() {
+        return new Team(1L, "test1");
+    }
+
     @Test
     public void testGetAll() {
         List<Team> teams = new ArrayList<>();
-        teams.add(team1);
+        teams.add(getTeam());
         Mockito.when(teamRepository.getAll()).thenReturn(teams);
         Assert.assertEquals(teamController.getAll(), teams);
     }
 
     @Test
     public void testGetById() {
-        teamController.save(team1);
-        Mockito.when(teamController.getById(ID)).thenReturn(team1);
-        Assert.assertEquals(teamRepository.getById(ID),team1);
+        teamController.save(getTeam());
+        Mockito.when(teamController.getById(ID)).thenReturn(getTeam());
+        Assert.assertEquals(teamRepository.getById(ID),getTeam());
     }
 
 }

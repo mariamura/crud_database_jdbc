@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Developer {
 
@@ -70,5 +71,18 @@ public class Developer {
                 ", lastName='" + lastName + '\'' +
                 ", skills=" + skills +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Developer developer = (Developer) o;
+        return Objects.equals(getId(), developer.getId()) && Objects.equals(getFirstName(), developer.getFirstName()) && Objects.equals(getLastName(), developer.getLastName()) && Objects.equals(getSkills(), developer.getSkills());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getSkills());
     }
 }

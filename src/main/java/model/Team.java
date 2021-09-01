@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Team {
 
@@ -73,5 +74,18 @@ public class Team {
                 ", developers=" + developers +
                 ", teamStatus=" + teamStatus +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return Objects.equals(getId(), team.getId()) && Objects.equals(getName(), team.getName()) && Objects.equals(getDevelopers(), team.getDevelopers()) && getTeamStatus() == team.getTeamStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getDevelopers(), getTeamStatus());
     }
 }

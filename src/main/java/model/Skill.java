@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Skill {
 
     private Long id;
@@ -32,5 +34,18 @@ public class Skill {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Skill skill = (Skill) o;
+        return Objects.equals(getId(), skill.getId()) && Objects.equals(getName(), skill.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName());
     }
 }
